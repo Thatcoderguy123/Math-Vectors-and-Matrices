@@ -161,3 +161,25 @@ aug_matrix=[[10, 24, 34, 1, 0, 0],
             [13, 21, 12, 0, 0, 1]]
 
 solve_matrix_and_matrix_inverse(aug_matrix)
+
+def determinant(m):
+    n = len(m)
+    if n == 2:
+        det_ = m[0][0] * m[1][1] - m[0][1] * m[1][0]
+        return det_
+
+    det = 0
+    for i in range(n):
+        copy_ = copy.deepcopy(m)
+        copy_.remove(copy_[0])
+        for row in copy_:
+            row.remove(row[i])
+        det += ((-1) ** (1 + i + 1)) * m[0][i] * determinant(copy_)
+    return det
+
+matrix = [[1, 2, 3, 4],
+          [4, 5, 6, 7],
+          [7, 8, 9, 10],
+          [10, 11, 12, 13]]
+
+print(determinant(matrix))
